@@ -14,6 +14,7 @@ namespace Eyeshot.BlendSurface
         [STAThread]
         static void Main()
         {
+            devDept.LicenseManager.Unlock("EU23-QTRK6-12ML3-U428-REJW");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
