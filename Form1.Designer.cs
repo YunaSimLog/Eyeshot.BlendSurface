@@ -32,7 +32,7 @@ namespace Eyeshot.BlendSurface
             devDept.Eyeshot.Control.CancelToolBarButton cancelToolBarButton1 = new devDept.Eyeshot.Control.CancelToolBarButton("Cancel", devDept.Eyeshot.Control.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.Control.ProgressBar progressBar1 = new devDept.Eyeshot.Control.ProgressBar(devDept.Eyeshot.Control.ProgressBar.styleType.Speedometer, 0, "Idle", System.Drawing.Color.Black, System.Drawing.Color.Transparent, System.Drawing.Color.Green, 1D, true, cancelToolBarButton1, false, 0.1D, 0.333D, true);
             devDept.Eyeshot.Control.BackgroundSettings backgroundSettings1 = new devDept.Eyeshot.Control.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(163)))), ((int)(((byte)(210))))), 0.75D, null, devDept.Eyeshot.colorThemeType.Auto, 0.33D);
-            devDept.Eyeshot.Camera camera1 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0.018434349666532526D, 0.039532590434972079D, 0.42221602280006187D, 0.90544518284475428D), devDept.Eyeshot.projectionType.Perspective, 40D, 3.1399999906012548D, false, 0.001D);
+            devDept.Eyeshot.Camera camera1 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0.018434349666532526D, 0.039532590434972079D, 0.42221602280006187D, 0.90544518284475428D), devDept.Eyeshot.projectionType.Perspective, 40D, 3.1600000488140783D, false, 0.001D);
             devDept.Eyeshot.Control.HomeToolBarButton homeToolBarButton1 = new devDept.Eyeshot.Control.HomeToolBarButton("Home", devDept.Eyeshot.Control.ToolBarButton.styleType.PushButton, true, true);
             devDept.Eyeshot.Control.MagnifyingGlassToolBarButton magnifyingGlassToolBarButton1 = new devDept.Eyeshot.Control.MagnifyingGlassToolBarButton("Magnifying Glass", devDept.Eyeshot.Control.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.Control.ZoomWindowToolBarButton zoomWindowToolBarButton1 = new devDept.Eyeshot.Control.ZoomWindowToolBarButton("Zoom Window", devDept.Eyeshot.Control.ToolBarButton.styleType.ToggleButton, true, true);
@@ -67,73 +67,39 @@ namespace Eyeshot.BlendSurface
             devDept.Eyeshot.Control.NavigationSettings navigationSettings1 = new devDept.Eyeshot.Control.NavigationSettings(devDept.Eyeshot.Camera.navigationType.Examine, new devDept.Eyeshot.Control.MouseButton(devDept.Eyeshot.Control.mouseButtonsZPR.Left, devDept.Eyeshot.Control.modifierKeys.None), new devDept.Geometry.Point3D(-1000D, -1000D, -1000D), new devDept.Geometry.Point3D(1000D, 1000D, 1000D), 8D, 50D, 50D);
             devDept.Eyeshot.Control.CoordinateSystemIcon coordinateSystemIcon1 = new devDept.Eyeshot.Control.CoordinateSystemIcon(new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129))), System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80))))), System.Drawing.Color.OrangeRed, "Origin", "X", "Y", "Z", true, devDept.Eyeshot.Control.coordinateSystemPositionType.BottomLeft, 37, null, false);
             devDept.Eyeshot.Control.ViewCubeIcon viewCubeIcon1 = new devDept.Eyeshot.Control.ViewCubeIcon(devDept.Eyeshot.Control.coordinateSystemPositionType.TopRight, true, System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(20)))), ((int)(((byte)(60))))), true, "FRONT", "BACK", "LEFT", "RIGHT", "TOP", "BOTTOM", System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77))))), 'S', 'N', 'W', 'E', true, null, System.Drawing.Color.White, System.Drawing.Color.Black, 120, true, true, null, null, null, null, null, null, false, new devDept.Geometry.Quaternion(0D, 0D, 0D, 1D), true);
-            devDept.Eyeshot.Control.Viewport viewport1 = new devDept.Eyeshot.Control.Viewport(new System.Drawing.Point(0, 0), new System.Drawing.Size(610, 314), backgroundSettings1, camera1, new devDept.Eyeshot.Control.ToolBar[] {
+            devDept.Eyeshot.Control.Viewport viewport1 = new devDept.Eyeshot.Control.Viewport(new System.Drawing.Point(0, 0), new System.Drawing.Size(610, 316), backgroundSettings1, camera1, new devDept.Eyeshot.Control.ToolBar[] {
             toolBar1}, new devDept.Eyeshot.Control.Legend[] {
             legend1}, histogram1, devDept.Eyeshot.displayType.Rendered, true, false, false, new devDept.Eyeshot.Control.Grid[] {
             grid1}, new devDept.Eyeshot.Control.OriginSymbol[] {
             originSymbol1}, false, rotateSettings1, zoomSettings1, panSettings1, navigationSettings1, coordinateSystemIcon1, viewCubeIcon1, devDept.Eyeshot.viewType.Trimetric);
-            this.design1 = new devDept.Eyeshot.Control.Design();
-            this.btnExtend = new System.Windows.Forms.Button();
-            this.btnBlend = new System.Windows.Forms.Button();
             this.trkbExtend = new System.Windows.Forms.TrackBar();
             this.trkbBlend = new System.Windows.Forms.TrackBar();
             this.tbBlend = new System.Windows.Forms.TextBox();
             this.tbExtend = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.design1)).BeginInit();
+            this.chkExtend = new System.Windows.Forms.CheckBox();
+            this.chkBlend = new System.Windows.Forms.CheckBox();
+            this.design1 = new Eyeshot.BlendSurface.MyDesign();
             ((System.ComponentModel.ISupportInitialize)(this.trkbExtend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkbBlend)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.design1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // design1
-            // 
-            this.design1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.design1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.design1.Location = new System.Drawing.Point(12, 12);
-            this.design1.Name = "design1";
-            this.design1.ProgressBar = progressBar1;
-            this.design1.Size = new System.Drawing.Size(610, 314);
-            this.design1.TabIndex = 0;
-            this.design1.Text = "design1";
-            this.design1.Viewports.Add(viewport1);
-            // 
-            // btnExtend
-            // 
-            this.btnExtend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExtend.Location = new System.Drawing.Point(12, 397);
-            this.btnExtend.Name = "btnExtend";
-            this.btnExtend.Size = new System.Drawing.Size(112, 28);
-            this.btnExtend.TabIndex = 4;
-            this.btnExtend.Text = "늘리기";
-            this.btnExtend.UseVisualStyleBackColor = true;
-            // 
-            // btnBlend
-            // 
-            this.btnBlend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBlend.Location = new System.Drawing.Point(12, 346);
-            this.btnBlend.Name = "btnBlend";
-            this.btnBlend.Size = new System.Drawing.Size(112, 28);
-            this.btnBlend.TabIndex = 1;
-            this.btnBlend.Text = "곡면 연결";
-            this.btnBlend.UseVisualStyleBackColor = true;
             // 
             // trkbExtend
             // 
             this.trkbExtend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trkbExtend.Location = new System.Drawing.Point(130, 397);
+            this.trkbExtend.Location = new System.Drawing.Point(95, 397);
             this.trkbExtend.Name = "trkbExtend";
-            this.trkbExtend.Size = new System.Drawing.Size(438, 45);
+            this.trkbExtend.Size = new System.Drawing.Size(473, 45);
             this.trkbExtend.TabIndex = 5;
             // 
             // trkbBlend
             // 
             this.trkbBlend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trkbBlend.Location = new System.Drawing.Point(130, 346);
+            this.trkbBlend.Location = new System.Drawing.Point(95, 346);
             this.trkbBlend.Name = "trkbBlend";
-            this.trkbBlend.Size = new System.Drawing.Size(438, 45);
+            this.trkbBlend.Size = new System.Drawing.Size(473, 45);
             this.trkbBlend.TabIndex = 2;
             // 
             // tbBlend
@@ -154,37 +120,75 @@ namespace Eyeshot.BlendSurface
             this.tbExtend.TabIndex = 6;
             this.tbExtend.Text = "1.0";
             // 
+            // chkExtend
+            // 
+            this.chkExtend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkExtend.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkExtend.AutoSize = true;
+            this.chkExtend.Location = new System.Drawing.Point(12, 399);
+            this.chkExtend.Name = "chkExtend";
+            this.chkExtend.Size = new System.Drawing.Size(79, 22);
+            this.chkExtend.TabIndex = 8;
+            this.chkExtend.Text = "늘리기 모드";
+            this.chkExtend.UseVisualStyleBackColor = true;
+            this.chkExtend.Click += new System.EventHandler(this.chkExtend_Click);
+            // 
+            // chkBlend
+            // 
+            this.chkBlend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBlend.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkBlend.AutoSize = true;
+            this.chkBlend.Location = new System.Drawing.Point(12, 346);
+            this.chkBlend.Name = "chkBlend";
+            this.chkBlend.Size = new System.Drawing.Size(67, 22);
+            this.chkBlend.TabIndex = 9;
+            this.chkBlend.Text = "혼합 모드";
+            this.chkBlend.UseVisualStyleBackColor = true;
+            // 
+            // design1
+            // 
+            this.design1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.design1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.design1.Location = new System.Drawing.Point(12, 12);
+            this.design1.Name = "design1";
+            this.design1.ProgressBar = progressBar1;
+            this.design1.Size = new System.Drawing.Size(610, 316);
+            this.design1.TabIndex = 10;
+            this.design1.Text = "myDesign1";
+            this.design1.Viewports.Add(viewport1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 461);
+            this.Controls.Add(this.design1);
+            this.Controls.Add(this.chkBlend);
+            this.Controls.Add(this.chkExtend);
             this.Controls.Add(this.tbExtend);
             this.Controls.Add(this.tbBlend);
             this.Controls.Add(this.trkbBlend);
             this.Controls.Add(this.trkbExtend);
-            this.Controls.Add(this.btnBlend);
-            this.Controls.Add(this.btnExtend);
-            this.Controls.Add(this.design1);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.design1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkbExtend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkbBlend)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.design1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private devDept.Eyeshot.Control.Design design1;
-        private System.Windows.Forms.Button btnExtend;
-        private System.Windows.Forms.Button btnBlend;
         private System.Windows.Forms.TrackBar trkbExtend;
         private System.Windows.Forms.TrackBar trkbBlend;
         private System.Windows.Forms.TextBox tbBlend;
         private System.Windows.Forms.TextBox tbExtend;
+        private System.Windows.Forms.CheckBox chkExtend;
+        private System.Windows.Forms.CheckBox chkBlend;
+        private MyDesign design1;
     }
 }
 
