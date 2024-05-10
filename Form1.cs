@@ -308,22 +308,22 @@ namespace Eyeshot.BlendSurface
             double dir = _surfaceEnd ? 1 : -1;
 
             // 100 나누는 이유는 늘리기 값을 부드럽게 처리하기 위함.
-            double extensionFraction = Math.Abs(design1.ObjectManipulator.Transformation.Matrix[index, 3] - design1.ObjectManipulator.InitialTransformation.Matrix[index, 3]) / 100; 
+            double extensionFraction = Math.Abs(design1.ObjectManipulator.Transformation.Matrix[index, 3] - design1.ObjectManipulator.InitialTransformation.Matrix[index, 3]) / 100;
 
-            //if (_extendU)
-            //{
-            //    if (_surfaceEnd)
-            //        surface.ExtendAtU(_loft2.DomainU.High + dir * extensionFraction * _loft2.DomainU.Length);
-            //    else
-            //        surface.ExtendAtU(_loft2.DomainU.Low + dir * extensionFraction * _loft2.DomainU.Length);
-            //}
-            //else
-            //{
-            //    if (_surfaceEnd)
-            //        surface.ExtendAtV(_loft2.DomainV.High + dir * extensionFraction * _loft2.DomainV.Length);
-            //    else
-            //        surface.ExtendAtV(_loft2.DomainV.Low + dir * extensionFraction * _loft2.DomainV.Length);
-            //}
+            if (_extendU)
+            {
+                if (_surfaceEnd)
+                    surface.ExtendAtU(_loft2.DomainU.High + dir * extensionFraction * _loft2.DomainU.Length);
+                else
+                    surface.ExtendAtU(_loft2.DomainU.Low + dir * extensionFraction * _loft2.DomainU.Length);
+            }
+            else
+            {
+                if (_surfaceEnd)
+                    surface.ExtendAtV(_loft2.DomainV.High + dir * extensionFraction * _loft2.DomainV.Length);
+                else
+                    surface.ExtendAtV(_loft2.DomainV.Low + dir * extensionFraction * _loft2.DomainV.Length);
+            }
         }
     }
 }
