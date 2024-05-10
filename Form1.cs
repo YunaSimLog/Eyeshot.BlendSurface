@@ -134,6 +134,7 @@ namespace Eyeshot.BlendSurface
             design1.SetTipText("늘리기 할 곡면 모서리를 선택하세요.");
 
             chkExtend.Enabled = false;
+            gbBlend.Enabled = false;
 
             // 보이는 요소 선택 모드
             design1.ActionMode = devDept.Eyeshot.actionType.SelectVisibleByPick;
@@ -184,9 +185,7 @@ namespace Eyeshot.BlendSurface
             if (design1.IsolateAvailable)
                 design1.IsolateInstances(null);
 
-            design1.TempEntities.Clear();
-            design1.ObjectManipulator.Cancel();
-
+            // 실제 Surface 늘리기 처리
             Surface surface = design1.TempEntities[0] as Surface;
             if (surface != null)
             {
@@ -196,8 +195,12 @@ namespace Eyeshot.BlendSurface
                 _loft2.ExtendAtV(surface.DomainV.Low);
             }
 
+            design1.TempEntities.Clear();
+            design1.ObjectManipulator.Cancel();
+
             design1.Entities.Regen();
             chkExtend.Enabled = true;
+            gbBlend.Enabled = true;
             design1.SetTipText(string.Empty);
             design1.Invalidate();
         }
