@@ -89,18 +89,25 @@ namespace Eyeshot.BlendSurface
             this.trkbExtend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trkbExtend.Location = new System.Drawing.Point(95, 397);
+            this.trkbExtend.Maximum = 20;
+            this.trkbExtend.Minimum = 4;
             this.trkbExtend.Name = "trkbExtend";
             this.trkbExtend.Size = new System.Drawing.Size(473, 45);
             this.trkbExtend.TabIndex = 5;
+            this.trkbExtend.Value = 4;
+            this.trkbExtend.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trkbExtend_MouseUp);
             // 
             // trkbBlend
             // 
             this.trkbBlend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trkbBlend.Location = new System.Drawing.Point(95, 346);
+            this.trkbBlend.Maximum = 20;
+            this.trkbBlend.Minimum = 4;
             this.trkbBlend.Name = "trkbBlend";
             this.trkbBlend.Size = new System.Drawing.Size(473, 45);
             this.trkbBlend.TabIndex = 2;
+            this.trkbBlend.Value = 4;
             // 
             // tbBlend
             // 
