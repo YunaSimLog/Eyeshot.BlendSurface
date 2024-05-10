@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Eyeshot.BlendSurface
     {
         Surface _loft1, _loft2;                         // 합칠 곡면들
         int _indexEdge1, _indexEdge2, _indexSurf = -1;    // 합칠 모서리의 인덱스와 합쳐진 곡면 인덱스
+        const double TOL = 0.1;
 
         bool _extendU;
         bool _surfaceEnd;
@@ -169,11 +171,6 @@ namespace Eyeshot.BlendSurface
             design1.Invalidate();
         }
 
-        private void trkbExtend_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void Design1_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right || design1.TempEntities.Count <= 0 || !(design1.TempEntities[0] is Surface))
@@ -217,6 +214,47 @@ namespace Eyeshot.BlendSurface
             Curve curve = e.AddedItems[0].Item as Curve;
             design1.Entities.RemoveAll(ent => ent is ICurve);
             EnableSurfaceExtension(curve);
+        }
+
+        private void ObjectManipulator_MouseDrag(object sender, devDept.Eyeshot.Control.ObjectManipulator.ObjectManipulatorEventArgs e)
+        {
+            Surface surface = (Surface)_loft2.Clone();
+            design1.TempEntities.Clear();
+            surface.Color = Color.FromArgb(150, Color.Beige);
+            surface.ColorMethod = colorMethodType.byEntity;
+            ExtendSurface(surface);
+            surface.Regen(0.1);
+            design1.TempEntities.Add(surface);
+            design1.Invalidate();
+        }
+
+        private void chkBlend_Click(object sender, EventArgs e)
+        {
+            design1.SetDefaultCursor(Cursors.WaitCursor);
+            try
+            {
+                if (!chkBlend.Checked)
+                    return;
+
+                chkBlend.Enabled = false;
+                gbExtension.Enabled = false;
+
+                // loft1과 loft2의 곡면을 혼합 곡면으로 만들기
+                Surface blendSurface = Surface.Blend(_loft1, _loft2, _indexEdge1, _indexEdge2, TOL, true, false);
+
+                design1.Entities.Add(blendSurface, Color.Brown);
+                design1.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                Debug.Assert(false);
+            }
+            finally
+            {
+                design1.SetDefaultCursor(Cursors.Default);
+            }
+
         }
 
         private void EnableSurfaceExtension(Curve curve)
@@ -291,18 +329,6 @@ namespace Eyeshot.BlendSurface
                 _extendU = false;
                 _surfaceEnd = true;
             }
-        }
-
-        private void ObjectManipulator_MouseDrag(object sender, devDept.Eyeshot.Control.ObjectManipulator.ObjectManipulatorEventArgs e)
-        {
-            Surface surface = (Surface)_loft2.Clone();
-            design1.TempEntities.Clear();
-            surface.Color = Color.FromArgb(150, Color.Beige);
-            surface.ColorMethod = colorMethodType.byEntity;
-            ExtendSurface(surface);
-            surface.Regen(0.1);
-            design1.TempEntities.Add(surface);
-            design1.Invalidate();
         }
 
         private void ExtendSurface(Surface surface)
