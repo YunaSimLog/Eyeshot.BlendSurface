@@ -380,12 +380,50 @@ namespace Eyeshot.BlendSurface
 
         private void tbInfluenceEdge1_TextChanged(object sender, EventArgs e)
         {
+            if (!chkBlend.Checked || !tbInfluenceEdge1.Focused)
+                return;
 
+            double influence;
+            if (!double.TryParse(tbInfluenceEdge1.Text, out influence))
+                return;
+            if (influence >= 0.4 && influence <= 2.0)
+                trkbInfluenceEdge1.Value = (int)(influence * 10);
+            else if (influence < 0.4)
+            {
+                trkbInfluenceEdge1.Value = 4;
+                influence = 0.4;
+            }
+            else
+            {
+                trkbInfluenceEdge1.Value = 20;
+                influence = 2;
+            }
+
+            ChangeSurface(influence, true, false);
         }
 
         private void tbInfluenceEdge2_TextChanged(object sender, EventArgs e)
         {
+            if (!chkBlend.Checked || !tbInfluenceEdge2.Focused)
+                return;
 
+            double influence;
+            if (!double.TryParse(tbInfluenceEdge2.Text, out influence))
+                return;
+            if (influence >= 0.4 && influence <= 2.0)
+                trkbInfluenceEdge2.Value = (int)(influence * 10);
+            else if (influence < 0.4)
+            {
+                trkbInfluenceEdge2.Value = 4;
+                influence = 0.4;
+            }
+            else
+            {
+                trkbInfluenceEdge2.Value = 20;
+                influence = 2;
+            }
+
+            ChangeSurface(influence, false, true);
         }
 
         private void EnableObjectManipulator(double u, double v)
