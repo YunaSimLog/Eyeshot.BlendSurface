@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,10 @@ namespace Eyeshot.BlendSurface
     public partial class Form1 : Form
     {
         Surface _loft1, _loft2;                         // 합칠 곡면들
-        int _indexEdge1, _indexEdge2, _indexSurf = -1;    // 합칠 모서리의 인덱스와 합쳐진 곡면 인덱스
+        int _indexEdge1, _indexEdge2, _indexBlendSurf = -1;    // 합칠 모서리의 인덱스와 합쳐진 곡면 인덱스
         const double TOL = 0.1;
+        double _midLeg1 = -1.0;
+        double _midLeg2 = -1.0;
 
         bool _extendU;
         bool _surfaceEnd;
@@ -230,19 +233,23 @@ namespace Eyeshot.BlendSurface
 
         private void chkBlend_Click(object sender, EventArgs e)
         {
+            if (!chkBlend.Checked)
+                return;
+
             design1.SetDefaultCursor(Cursors.WaitCursor);
             try
             {
-                if (!chkBlend.Checked)
-                    return;
-
                 chkBlend.Enabled = false;
                 gbExtension.Enabled = false;
 
                 // loft1과 loft2의 곡면을 혼합 곡면으로 만들기
                 Surface blendSurface = Surface.Blend(_loft1, _loft2, _indexEdge1, _indexEdge2, TOL, true, false);
 
+                // 컨트롤 포인트의 기본 거리를 정의합니다.
+                UpdateMidLegs(blendSurface);
+
                 design1.Entities.Add(blendSurface, Color.Brown);
+                _indexBlendSurf = design1.Entities.IndexOf(blendSurface);
                 design1.Invalidate();
             }
             catch (Exception ex)
@@ -254,7 +261,59 @@ namespace Eyeshot.BlendSurface
             {
                 design1.SetDefaultCursor(Cursors.Default);
             }
+        }
 
+        private void trkbInfluenceEdge1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!chkBlend.Checked)
+                return;
+
+            double influence = ((double)trkbInfluenceEdge1.Value) / 10.0;
+            tbInfluenceEdge1.Text = influence.ToString(CultureInfo.InvariantCulture);
+            ChangeSurface(influence, true, false);
+        }
+
+        private void trkbInfluenceEdge2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!chkBlend.Checked)
+                return;
+
+            double influence = ((double)trkbInfluenceEdge2.Value) / 10.0;
+            tbInfluenceEdge2.Text = influence.ToString(CultureInfo.InvariantCulture);
+            ChangeSurface(influence, false, true);
+        }
+
+        private void UpdateMidLegs(Surface surface)
+        {
+            if (_midLeg1 >= 0 || _midLeg2 >= 0)
+                return;
+
+            Point4D[,] controlPoints = surface.ControlPoints;
+
+            double sum1 = 0;
+            double sum2 = 0;
+
+            // U방향의 제어점 수를 가져온다.
+            int onDirU = controlPoints.GetLength(0);
+
+            for (int i = 0; i < onDirU; i++)
+            {
+                Point4D p0 = controlPoints[i, 0];
+                Point4D p1 = controlPoints[i, 1];
+
+                Vector3D startLeg = new Vector3D(p0, p1);
+                sum1 += startLeg.Length;
+
+                Point4D p2 = controlPoints[i, 2];
+                Point4D p3 = controlPoints[i, 3];
+
+                Vector3D endLeg = new Vector3D(p3, p2);
+                sum2 += endLeg.Length;
+            }
+
+            // 기본 영향 값을 평균으로 설정한다.
+            _midLeg1 = sum1 / onDirU;
+            _midLeg2 = sum2 / onDirU;
         }
 
         private void EnableSurfaceExtension(Curve curve)
@@ -277,6 +336,56 @@ namespace Eyeshot.BlendSurface
 
             SetExtensionSide(u, v);
             EnableObjectManipulator(u, v);
+        }
+
+        // 최종 혼합 곡면 모서리의 영향을 바꾼다.
+        private void ChangeSurface(double influence, bool side1, bool side2)
+        {
+            Surface surface = (Surface)design1.Entities[_indexBlendSurf];
+            Point4D[,] controlPoints = surface.ControlPoints;
+
+            for (int i = 0; i < controlPoints.GetLength(0); i++)
+            {
+                if (side1)
+                {
+                    Point4D p0 = controlPoints[i, 0];
+                    Point4D p1 = controlPoints[i, 1];
+
+                    Vector3D startLeg = new Vector3D(p0, p1);
+                    startLeg.Normalize();
+
+                    controlPoints[i, 1] = new Point4D(p0 + startLeg * _midLeg1 * influence);
+                }
+
+                if (side2)
+                {
+                    Point4D p2 = controlPoints[i, 2];
+                    Point4D p3 = controlPoints[i, 3];
+
+                    Vector3D endLeg = new Vector3D(p3, p2);
+                    endLeg.Normalize();
+
+                    controlPoints[i, 2] = new Point4D(p3 + endLeg * _midLeg2 * influence);
+                }
+            }
+
+            ((Surface)design1.Entities[_indexBlendSurf]).RebuildEdges(TOL);
+
+            design1.Entities[_indexBlendSurf].RegenMode = regenType.RegenAndCompile;
+            design1.Entities.Regen();
+            design1.Invalidate();
+
+            design1.SetDefaultCursor(Cursors.Arrow);
+        }
+
+        private void tbInfluenceEdge1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbInfluenceEdge2_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void EnableObjectManipulator(double u, double v)
